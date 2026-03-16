@@ -10,7 +10,7 @@ export function StatsCards({ data }: Props) {
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {entries.map(([key, series]) => {
           const pts = series.data;
           if (pts.length === 0) return null;

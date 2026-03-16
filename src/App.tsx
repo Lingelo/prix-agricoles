@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useData } from './hooks/useData.ts';
 import { Header } from './components/Header.tsx';
 import { StatsCards } from './components/StatsCards.tsx';
@@ -5,9 +6,11 @@ import { PriceChart } from './components/PriceChart.tsx';
 import { YoyChart } from './components/YoyChart.tsx';
 import { DataTable } from './components/DataTable.tsx';
 import { Footer } from './components/Footer.tsx';
+import { AboutModal } from './components/AboutModal.tsx';
 
 function App() {
   const { data, loading, error } = useData();
+  const [showAbout, setShowAbout] = useState(false);
 
   if (loading) {
     return (
@@ -43,7 +46,10 @@ function App() {
         <YoyChart data={data} />
         <DataTable data={data} />
       </main>
-      <Footer generatedAt={data.meta.generatedAt} />
+      <Footer generatedAt={data.meta.generatedAt} onAboutClick={() => setShowAbout(true)} />
+      {showAbout && (
+        <AboutModal onClose={() => setShowAbout(false)} lastUpdate={data.meta.generatedAt} />
+      )}
     </div>
   );
 }

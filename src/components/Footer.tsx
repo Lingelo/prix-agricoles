@@ -1,8 +1,11 @@
+import { timeAgo } from '../utils/format';
+
 interface Props {
   generatedAt?: string;
+  onAboutClick: () => void;
 }
 
-export function Footer({ generatedAt }: Props) {
+export function Footer({ generatedAt, onAboutClick }: Props) {
   return (
     <footer className="bg-green-900 text-green-200 text-xs sm:text-sm px-4 sm:px-6 py-4 mt-8">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
@@ -16,10 +19,14 @@ export function Footer({ generatedAt }: Props) {
           >
             INSEE — IPPAP Base 2020
           </a>
+          {' · '}
+          <button onClick={onAboutClick} className="underline hover:text-white">
+            A propos
+          </button>
         </p>
         {generatedAt && (
           <p className="text-green-300/70">
-            Derniere mise a jour : {new Date(generatedAt).toLocaleDateString('fr-FR')}
+            Mise a jour {timeAgo(generatedAt)}
           </p>
         )}
       </div>
